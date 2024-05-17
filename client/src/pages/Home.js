@@ -13,7 +13,7 @@ const Home = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  console.log('user',user)
+  // console.log('user',user)
   const fetchUserDetails = async()=>{
     try {
         const URL = `${process.env.REACT_APP_BACKEND_URL}/api/user-details`
@@ -28,7 +28,7 @@ const Home = () => {
             dispatch(logout())
             navigate("/email")
         }
-        console.log("current user Details",response)
+        // console.log("current user Details",response)
     } catch (error) {
         console.log("error",error)
     }
@@ -47,7 +47,7 @@ const Home = () => {
     })
 
     socketConnection.on('onlineUser',(data)=>{
-      console.log(data)
+      // console.log(data)
       dispatch(setOnlineUser(data))
     })
 
