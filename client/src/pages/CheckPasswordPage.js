@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { setToken, setUser } from '../redux/userSlice';
 
 const CheckPasswordPage = () => {
+  const [isLoading, setIsLoading]=useState(false)
   const [data,setData] = useState({
     password : "",
     userId : ""
@@ -36,6 +37,7 @@ const CheckPasswordPage = () => {
   }
 
   const handleSubmit = async(e)=>{
+    setIsLoading(true)
     e.preventDefault()
     e.stopPropagation()
 
@@ -55,6 +57,7 @@ const CheckPasswordPage = () => {
         toast.success(response.data.message)
 
         if(response.data.success){
+          setIsLoading(false)
             dispatch(setToken(response?.data?.token))
             localStorage.setItem('token',response?.data?.token)
 
@@ -64,6 +67,7 @@ const CheckPasswordPage = () => {
             navigate('/')
         }
     } catch (error) {
+       setIsLoading(false)
         toast.error(error?.response?.data?.message)
     }
   }
@@ -106,12 +110,12 @@ const CheckPasswordPage = () => {
               <button
                className='bg-primary text-lg  px-4 py-1 hover:bg-secondary rounded mt-2 font-bold text-white leading-relaxed tracking-wide'
               >
-                Login
+               {isLoading ?"loading...": "Login"}
+
               </button>
 
           </form>
 
-          <p className='my-3 text-center'><Link to={"/forgot-password"} className='hover:text-primary font-semibold'>Forgot password ?</Link></p>
         </div>
     </div>
   )

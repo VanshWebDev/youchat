@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { PiUserCircle } from "react-icons/pi";
 
 const CheckEmailPage = () => {
+  const [isLoading, setIsLoading]=useState(false)
   const [data,setData] = useState({
     email : "",
   })
@@ -26,7 +27,7 @@ const CheckEmailPage = () => {
   const handleSubmit = async(e)=>{
     e.preventDefault()
     e.stopPropagation()
-
+    setIsLoading(true);
     const URL = `${process.env.REACT_APP_BACKEND_URL}/api/email`
 
     try {
@@ -41,9 +42,11 @@ const CheckEmailPage = () => {
             navigate('/password',{
               state : response?.data?.data
             })
+            setIsLoading(false);
         }
     } catch (error) {
         toast.error(error?.response?.data?.message)
+        setIsLoading(false);
     }
   }
 
@@ -80,7 +83,7 @@ const CheckEmailPage = () => {
               <button
                className='bg-primary text-lg  px-4 py-1 hover:bg-secondary rounded mt-2 font-bold text-white leading-relaxed tracking-wide'
               >
-                Let's Go
+                {isLoading ?"loading...": "Let's go"}
               </button>
 
           </form>
