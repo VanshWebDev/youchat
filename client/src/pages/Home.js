@@ -76,7 +76,7 @@ const Home = () => {
             <div>
               <img
                 src={logo}
-                width={250}
+                width={100}
                 alt='logo'
               />
             </div>

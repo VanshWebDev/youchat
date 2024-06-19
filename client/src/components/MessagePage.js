@@ -35,7 +35,7 @@ const MessagePage = () => {
   const [loading,setLoading] = useState(false)
   const [allMessage,setAllMessage] = useState([])
   const currentMessage = useRef(null)
-
+  const audioRef = useRef(null); // Ref for the notification audio
   useEffect(()=>{
       if(currentMessage.current){
           currentMessage.current.scrollIntoView({behavior : 'smooth', block : 'end'})
@@ -125,6 +125,9 @@ const MessagePage = () => {
   }
 
   const handleSendMessage = (e)=>{
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
     e.preventDefault()
 
     if(message.text || message.imageUrl || message.videoUrl){
@@ -326,6 +329,7 @@ const MessagePage = () => {
               
           </section>
 
+          <audio ref={audioRef} src={notificationAudio} preload='auto'></audio>
 
 
     </div>
