@@ -8,7 +8,7 @@ const { app, server } = require('./socket/index')
 
 // const app = express()
 app.use(cors({
-    origin : ["https://youchattt.netlify.app", "http://localhost:3000"],
+    origin : process.env.FRONTEND_URL,
     credentials : true
 }))
 app.use(express.json())
