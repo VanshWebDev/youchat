@@ -1,19 +1,15 @@
 {
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/api/:path*",
-      "destination": "https://youchat-snowy.vercel.app/:path*"
+      "src": "./index.js",
+      "use": "@vercel/node"
     }
   ],
-  "headers": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://youchattt.netlify.app"
-        }
-      ]
+      "src": "/(.*)",
+      "dest": "/"
     }
   ]
 }
